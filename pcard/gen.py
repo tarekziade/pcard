@@ -4,13 +4,16 @@ import binascii
 from string import ascii_letters, digits
 from hashlib import sha256
 import base64
+import getpass
+import sys
 
 
-SYMBOLS = "☀ ☂ ☎ ☠ ☭ ☮ ☺ ☹ ♔ ♘ ♜ ♥ ♣ ♪ ♻ ⚓ ⚛ ⚖ ★ ☕ ☯ ⚪ ⚫ ⚥ ♂ ♀ ☾ ☞ ☢"
+SYMBOLS = u"☀ ☂ ☎ ☠ ☭ ☮ ☺ ☹ ♔ ♘ ♜ ♥ ♣ ♪ ♻ ⚓ ⚛ ⚖ ★ ☕ ☯ ⚪ ⚫ ⚥ ♂ ♀ ☾ ☞ ☢"
 ALLOWED = ascii_letters + digits
+_LINES = 10
 
 
-def generate_key(size=8):
+def generate_key(size=_LINES):
     return binascii.b2a_hex(os.urandom(size))[:size]
 
 
@@ -25,7 +28,7 @@ def create_card(key=None):
     if key is None:
         key = generate_key()
     lines = []
-    for i in range(8):
+    for i in range(_LINES):
         hash_ = sha256(key)
         hash_.update(str(i))
         digest = hash_.digest()[:29]
@@ -39,11 +42,14 @@ def print_card(key, lines):
     for index, line in enumerate(lines):
         res.append('%d. %s' % (index, line))
     res.append('')
-    res.append(' ' * 20 + 'KEY: %s' % key)
     return '\n'.join(res)
 
 
 if __name__ == '__main__':
-    key, lines = create_card('plqs9876')
-    print print_card(key, lines)
-    print print_card(*create_card(key))
+    key = getpass.getpass('Type a key : ')
+    key2 = getpass.getpass('Type again : ')
+    if key != key2:
+        print('key mismatch')
+        sys.exit(0)
+    key, lines = create_card(key)
+    print(print_card(key, lines))
