@@ -45,7 +45,7 @@ def print_card(key, lines):
     return '\n'.join(res)
 
 
-if __name__ == '__main__':
+def main():
     key = getpass.getpass('Type a key : ')
     key2 = getpass.getpass('Type again : ')
     if key != key2:
@@ -53,3 +53,7 @@ if __name__ == '__main__':
         sys.exit(0)
     key, lines = create_card(key)
     print(print_card(key, lines))
+
+
+if __name__ == '__main__':
+    main()

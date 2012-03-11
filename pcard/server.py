@@ -4,10 +4,17 @@ from pcard.gen import create_card, SYMBOLS
 
 _INDEX = """\
 <h1>PCard</h1>
+<p>Beware that anyone can sniff your secret when you post the form.
+You should consider generating the card from your computer.</p>
 <form action="/card" method="POST">
-    <input type="password" name="key"/>
-    <input type="submit">
+     <input type="password" name="key"/>
+     <input type="submit">
 </form>
+<p>How to generate the card on your computer:</p>
+<pre>
+$ pip install pcard
+$ pcard
+</pre>
 """
 
 _CSS =  """
