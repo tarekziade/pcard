@@ -34,14 +34,16 @@ div.card {
  padding: 10px;
  text-align: center;
  vertical-align: middle;
- width: 90mm;
- height: 45mm;
+ width: 80mm;
+ height: 40mm;
  margin-top: 20px;
+ border: 1px solid black;
 }
 
 table {
  border-collapse: collapse;
- font-size: 3mm;
+ font-size: 2.5mm;
+ font-weight: bold;
 }
 
 pre {
@@ -50,6 +52,7 @@ pre {
  border-radius: 15px;
  padding: 10px;
  background-color: white;
+ border: 1px solid black;
 }
 </style>
 """
@@ -99,7 +102,7 @@ def get_card():
         res.append('</tr>')
 
     res.append('<tr></tr></table></div>')
-    res.append('<div class="card"><h4>PCard</h4>%s</div>' % HOW)
+    res.append('<div class="card">%s</div>' % HOW)
     return '\n'.join(res)
 
 
